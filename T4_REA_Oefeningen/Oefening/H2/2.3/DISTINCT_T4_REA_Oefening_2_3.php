@@ -42,7 +42,7 @@ include_once "../../../includes/header.php";
             $pdo = new PDO("odbc:odbc2sqlserver");
 
 
-            $query = "SELECT * FROM country";
+            $query = "SELECT DISTINCT * FROM country;";
 
             executeQuery($query);
 
@@ -71,7 +71,7 @@ include_once "../../../includes/header.php";
         catch (PDOException $e)
         {
             // Bij een error, toon dan deze melding
-            echo "Er is een probleem met ophalen van tblRiddles: " . $e->getMessage();
+            echo "Er is een probleem met ophalen van country: " . $e->getMessage();
             // Stop het script
             die();
         }
@@ -79,19 +79,10 @@ include_once "../../../includes/header.php";
 
         echo "<thead>";
         echo "<td>";
-        echo "<strong> ID </strong>";
+        echo "<strong> region </strong>";
         echo "</td>";
         echo "<td>";
-        echo "<strong> Raadsel </strong>";
-        echo "</td>";
-        echo "<td>";
-        echo "<strong> Oplossing </strong>";
-        echo "</td>";
-        echo "<td>";
-        echo "<strong> Bedenker </strong>";
-        echo "</td>";
-        echo "<td>";
-        echo "<strong> Datum </strong>";
+        echo "<strong> area </strong>";
         echo "</td>";
         echo "</thead>";
 
@@ -101,14 +92,10 @@ include_once "../../../includes/header.php";
 
             echo "<tr>";
             echo "<td>";
+            echo $row["region"] . "<br>";
             echo "</td>";
             echo "<td>";
-            echo "</td>";
-            echo "<td>";
-            echo "</td>";
-            echo "<td>";
-            echo "</td>";
-            echo "<td>";
+            echo $row["area"] . "<br>";
             echo "</td>";
             echo "</tr>";
         }
