@@ -21,8 +21,11 @@ footer
 	background-color: blue;
 	text-align: center;
 	height: 15%;
+	left: 0px;
+	right: 0px;
+	bottom: 0px;
 	padding-top: 15px;
-	position: relative;
+	position: fixed;
 }
 
 main
@@ -36,7 +39,7 @@ main nav
 	background-color: beige;
 	width: 25%;
 	float: left;
-	height: 85%;
+	height: 95%;
 	box-sizing: border-box;
 	padding: 25px;
 }
