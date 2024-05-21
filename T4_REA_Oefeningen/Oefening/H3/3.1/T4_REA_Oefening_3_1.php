@@ -1,7 +1,7 @@
 <?php
 /**
  * User: Tim Kleuver
- * Date: 9-5-2024
+ * Date: 21-5-2024
  * File: T3_REA_Oefening2.1.php
  */
 ?>
@@ -39,10 +39,7 @@ include_once "../../../includes/header.php";
 
             startConnection();
 
-            $pdo = new PDO("odbc:odbc2sqlserver");
-
-
-            $query = "SELECT * FROM country ORDER BY region";
+            $query = "SELECT * FROM tblRiddles WHERE Creator <> 'Admin' ";
 
             executeQuery($query);
 
@@ -71,7 +68,7 @@ include_once "../../../includes/header.php";
         catch (PDOException $e)
         {
             // Bij een error, toon dan deze melding
-            echo "Er is een probleem met ophalen van country: " . $e->getMessage();
+            echo "Er is een probleem met ophalen van tblRiddles: " . $e->getMessage();
             // Stop het script
             die();
         }
@@ -79,19 +76,19 @@ include_once "../../../includes/header.php";
 
         echo "<thead>";
         echo "<td>";
-        echo "<strong> name </strong>";
+        echo "<strong> ID </strong>";
         echo "</td>";
         echo "<td>";
-        echo "<strong> region </strong>";
+        echo "<strong> Raadsel </strong>";
         echo "</td>";
         echo "<td>";
-        echo "<strong> area </strong>";
+        echo "<strong> Oplossing </strong>";
         echo "</td>";
         echo "<td>";
-        echo "<strong> population </strong>";
+        echo "<strong> Bedenker </strong>";
         echo "</td>";
         echo "<td>";
-        echo "<strong> gdp </strong>";
+        echo "<strong> Datum </strong>";
         echo "</td>";
         echo "</thead>";
 
@@ -101,19 +98,19 @@ include_once "../../../includes/header.php";
 
             echo "<tr>";
             echo "<td>";
-            echo $row["name"] . "<br>";
+            echo $row["Id"] . "<br>";
             echo "</td>";
             echo "<td>";
-            echo $row["region"] . "<br>";
+            echo  $row["RiddleText"] . "<br>";
             echo "</td>";
             echo "<td>";
-            echo $row["area"] . "<br>";
+            echo  $row["RiddleAnswer"] . "<br>";
             echo "</td>";
             echo "<td>";
-            echo $row["population"] . "<br>";
+            echo "Bedenker:" . $row["Creator"] . "<br>";
             echo "</td>";
             echo "<td>";
-            echo $row["gdp"] . "<br>";
+            echo "Datum: " . $row["CreateDate"] . "<br>";
             echo "</td>";
             echo "</tr>";
         }
