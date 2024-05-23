@@ -70,8 +70,17 @@ include_once "../../../includes/header.php";
         startConnection();
 
         $query = "SELECT * FROM tblRiddles WHERE Creator <> 'Admin' ";
+        $query2 = "SELECT * FROM tblRiddles WHERE Creator <> 'Admin' ";
+
+        if (isset($_GET)){
+            $query2 = "INSERT INTO tblRiddles (Id, RiddleText, RiddleAnswer, Creator, CreateDate) 
+VALUES
+(, 101, '06-44662246', 'Eliene', 'dded'),
+";
+        }
 
         executeQuery($query);
+        executeQuery($query2);
 
         echo $query;
 
@@ -102,18 +111,6 @@ include_once "../../../includes/header.php";
             // Stop het script
             die();
         }
-        echo "<form method='get' action='T4_REA_Oefening_3_1-insert.php'>";
-        echo "<input name='tekst' type='text'>";
-        echo "<label for='css'>Grap tekst</label><br>";
-        echo "<input name='grap' type='text'>";
-        echo "<label for='css'>Grap</label><br>";
-        echo "<input name='datum' type='date'>";
-        echo "<label for='css'>Datum</label><br>";
-        echo "<input name='maker' type='text'>";
-        echo "<label for='css'>Maker</label><br>";
-        echo "<input name='opslaan' value='Opslaan' type='submit'>";
-        echo "</form>";
-        echo "<br>";
 
         echo "<table>";
 
@@ -162,8 +159,8 @@ include_once "../../../includes/header.php";
         ?>
         <br>
 
-        <!--<img src="images_pokemon_deelopdracht/Schermafbeelding 2024-04-23 112498810.png" style="width: 300px; height: 400px;">
-        <img src="images_pokemon_deelopdracht/Schermafbeelding 2024-04-23 1122489987.png" style="width: 400px; height: 400px;"> -->
+        <img src="images_pokemon_deelopdracht/Schermafbeelding 2024-04-23 112498810.png" style="width: 300px; height: 400px;">
+        <img src="images_pokemon_deelopdracht/Schermafbeelding 2024-04-23 1122489987.png" style="width: 400px; height: 400px;">
 
     </section>
 </main>

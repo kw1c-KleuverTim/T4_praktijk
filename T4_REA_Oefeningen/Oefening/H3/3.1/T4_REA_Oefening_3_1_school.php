@@ -1,7 +1,7 @@
 <?php
 /**
  * User: Tim Kleuver
- * Date: 2-5-2024
+ * Date: 21-5-2024
  * File: T3_REA_Oefening2.1.php
  */
 ?>
@@ -32,46 +32,63 @@ include_once "../../../includes/header.php";
         <h2>
             Uitwerkingen.
         </h2>
+        <!-- ** OPDRACHTEN VAN DEZE TAAK ** --
+        -- DENK AAN JE MODULEHEADER !!! --
 
-        <!--
-        	-- Opdracht 0a. Pas bovenstaande module header aan
-	-- (en zorg dat al je gemaakte .sql-bestanden jouw module header dragen)
-
-	-- Opdracht 0b. Taak 1.1: backup maken van je ijdb-database: sla dat script op met je eigen module header
-
--- ** OPDRACHTEN VAN DEZE TAAK ** --
--- Hieronder wordt verwezen naar de INSERT-voorbeelden in de reader.
-
--- Opdracht 1.
--- Voer een mop in volgens Voorbeeld 1 in de reader.
+-- Group By info:
+-- https://www.w3schools.com/sql/sql_groupby.asp
+-- Having info:
+-- https://www.w3schools.com/sql/sql_having.asp
+-- Soms zul je aggregate functions moeten gebruiken,
+-- zoals: SUM(), MIN(), MAX(), COUNT(), AVG()
+-- Zie ook W3schools voor uitleg van deze termen.
 
 
--- Opdracht 2.
--- Voer drie moppen in volgens Voorbeeld 3 in de reader. Als CreateDate voer je in: jouw geboortedatum.
+-- 1. Selecteer alle unieke plaatsnamen
+--	OPMERKING: Standaard gesorteerd van A tot Z
 
 
--- Opdracht 3.
--- Voer vier moppen in volgens Voorbeeld 4 in de reader. Als CreateDate voer je in: de exacte datum/tijd van dit moment (gebruik: GETDATE())
+-- 2. Selecteer alle unieke plaatsnamen en sorteer van Z tot A
 
 
--- Opdracht 4  -- creëer error
--- Voer één insert in met in de VALUES minder velden dan benodigd. Kopieer de errormelding en plak die ook hier onder je query.
+-- 3. Selecteer alle gegevens waarbij je de plaats sorteert van A tot Z en de postcode van Z-A
+
+
+-- 4. Bepaal het aantal scholen.
+
+-- 5. Bepaal het aantal scholen per plaatsnaam
+
+
+-- 6. Geef de kolom met het aantal de kolomnaam 'Aantal scholen'
+-- Opmerking:	'' ipv [] werkt ook, maar is geen ANSI SQL, dus [] gebruiken!
+
+-- 7. Sorteer het aantal scholen per plaats van groot naar klein
+
+
+-- 8. Selecteer alle plaatsnamen waar meer dan 2 scholen zijn
+
+
+-- 9. Selecteer alle postcodes en geef aan hoeveel scholen deze postcode hebben
+
+
+-- 10. Selecteer alle postcodes en geef aan hoeveel scholen deze postcode hebben. Laat nu alleen de postcodes zien die meer dan 1x voorkomen.
 
 
 
--- Opdracht 5  -- creëer error
--- Voer één insert in met in de VALUES meer velden dan toegestaan. Kopieer de errormelding en plak die ook hier onder je query.
-        -->
+-- 11. Bepaal hoeveel scholen van Fontys er in de database voorkomen
+
+-->
 
 
         <?php
-        include_once "../../../includes/dbfunctions.php";
 
-        startConnection();
+            include_once "../../../includes/dbfunctions.php";
 
-        $query = "SELECT * FROM tblRiddles WHERE Creator <> 'Admin' ";
+            startConnection();
 
-        executeQuery($query);
+            $query = "SELECT * FROM school ORDER BY straatnaam";
+
+            executeQuery($query);
 
         echo $query;
 
@@ -102,36 +119,31 @@ include_once "../../../includes/header.php";
             // Stop het script
             die();
         }
-        echo "<form method='get' action='T4_REA_Oefening_3_1-insert.php'>";
-        echo "<input name='tekst' type='text'>";
-        echo "<label for='css'>Grap tekst</label><br>";
-        echo "<input name='grap' type='text'>";
-        echo "<label for='css'>Grap</label><br>";
-        echo "<input name='datum' type='date'>";
-        echo "<label for='css'>Datum</label><br>";
-        echo "<input name='maker' type='text'>";
-        echo "<label for='css'>Maker</label><br>";
-        echo "<input name='opslaan' value='Opslaan' type='submit'>";
-        echo "</form>";
-        echo "<br>";
+
 
         echo "<table>";
 
         echo "<thead>";
         echo "<td>";
-        echo "<strong> ID </strong>";
+        echo "<strong> schoolID </strong>";
         echo "</td>";
         echo "<td>";
-        echo "<strong> Raadsel </strong>";
+        echo "<strong> naam </strong>";
         echo "</td>";
         echo "<td>";
-        echo "<strong> Oplossing </strong>";
+        echo "<strong> straatnaam </strong>";
         echo "</td>";
         echo "<td>";
-        echo "<strong> Bedenker </strong>";
+        echo "<strong> huisnr </strong>";
         echo "</td>";
         echo "<td>";
-        echo "<strong> Datum </strong>";
+        echo "<strong> huisnrToevoeging </strong>";
+        echo "</td>";
+        echo "<td>";
+        echo "<strong> postcode </strong>";
+        echo "</td>";
+        echo "<td>";
+        echo "<strong> plaatsnaam </strong>";
         echo "</td>";
         echo "</thead>";
 
@@ -141,19 +153,25 @@ include_once "../../../includes/header.php";
 
             echo "<tr>";
             echo "<td>";
-            echo $row["Id"] . "<br>";
+            echo $row["schoolId"] . "<br>";
             echo "</td>";
             echo "<td>";
-            echo  $row["RiddleText"] . "<br>";
+            echo  $row["naam"] . "<br>";
             echo "</td>";
             echo "<td>";
-            echo  $row["RiddleAnswer"] . "<br>";
+            echo  $row["straatnaam"] . "<br>";
             echo "</td>";
             echo "<td>";
-            echo "Bedenker:" . $row["Creator"] . "<br>";
+            echo  $row["huisnr"] . "<br>";
             echo "</td>";
             echo "<td>";
-            echo "Datum: " . $row["CreateDate"] . "<br>";
+            echo  $row["huisnrToevoeging"] . "<br>";
+            echo "</td>";
+            echo "<td>";
+            echo  $row["postcode"] . "<br>";
+            echo "</td>";
+            echo "<td>";
+            echo  $row["plaatsnaam"] . "<br>";
             echo "</td>";
             echo "</tr>";
         }
@@ -163,7 +181,7 @@ include_once "../../../includes/header.php";
         <br>
 
         <!--<img src="images_pokemon_deelopdracht/Schermafbeelding 2024-04-23 112498810.png" style="width: 300px; height: 400px;">
-        <img src="images_pokemon_deelopdracht/Schermafbeelding 2024-04-23 1122489987.png" style="width: 400px; height: 400px;"> -->
+        <img src="images_pokemon_deelopdracht/Schermafbeelding 2024-04-23 1122489987.png" style="width: 400px; height: 400px;">-->
 
     </section>
 </main>
@@ -172,4 +190,5 @@ include_once "../../../includes/footer.php";
 ?>
 </body>
 </html>
+
 
